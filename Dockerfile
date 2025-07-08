@@ -11,8 +11,10 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Fix build process - compile TypeScript first, then build frontend, then server
+RUN npx tsc --noEmit --skipLibCheck
+RUN npx vite build
+RUN npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
 
 # Remove dev dependencies after build
 RUN npm prune --production
@@ -29,4 +31,4 @@ USER nextjs
 EXPOSE 5000
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["node", "dist/index.js"]
