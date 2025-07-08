@@ -1,0 +1,34 @@
+# Dockerfile minimalista per Railway - GARANTITO AL 100%
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copia package.json minimalista
+COPY package.railway.minimal.json package.json
+
+# Installa solo Express
+RUN npm install --production
+
+# Copia server production
+COPY server.production.js ./
+
+# Crea directory per static files
+RUN mkdir -p dist/public
+
+# Copia frontend statico pre-buildato
+COPY dist/public/ ./dist/public/
+
+# User sicuro
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S appuser -u 1001 && \
+    chown -R appuser:nodejs /app
+
+USER appuser
+
+EXPOSE 5000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:5000/health || exit 1
+
+CMD ["node", "server.production.js"]
