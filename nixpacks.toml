@@ -1,11 +1,3 @@
-[phases.setup]
-nixPkgs = ["nodejs", "npm"]
-
-[phases.install]
-cmds = ["npm ci"]
-
-[phases.build]
-cmds = ["npm run build"]
-
-[start]
-cmd = "npm start"
+# DISABILITATO - USA DOCKERFILE INVECE
+# Railway dovrebbe rilevare automaticamente il Dockerfile
+# Se continua a usare nixpacks, cancella questo file

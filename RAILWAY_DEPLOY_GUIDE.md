@@ -14,14 +14,14 @@ Il problema è che Railway non trova i file del progetto. Ecco come risolverlo:
 ### 2. Upload Corretto su GitHub
 
 **Metodo A - Upload Web (Consigliato)**
-1. Scarica `money-management-github.zip`
+1. Scarica `money-management-github-fixed.zip`
 2. Estrai TUTTI i file in una cartella locale
 3. GitHub.com → "New repository" → `money-management-pro`
 4. "Upload files" → Seleziona TUTTI i file estratti (non lo ZIP)
 5. Commit: "Initial commit - Money Management Pro"
 
 **Metodo B - GitHub Desktop**
-1. Estrai `money-management-github.zip`
+1. Estrai `money-management-github-fixed.zip`
 2. Apri GitHub Desktop
 3. "Add Local Repository" → Seleziona cartella estratta
 4. "Publish repository"
